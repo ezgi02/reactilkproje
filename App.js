@@ -1,19 +1,30 @@
-import Temperature from './components/temperature';
+import CatagoriyList from "./CatagoriyList";
+import { Container,Row,Col } from 'reactstrap'
+import ProductList from "./ProductList";
 
+import React, { Component } from 'react'
 
-
-function App() {
-  return (
-    <div className="App">
-      <h1>Hava Nasil</h1>
-      <h2>Derece</h2>
-      <header className="App-header">
-            <h3>Celciustan Fahreneita Cevirme</h3>
-            <Temperature />
-        </header>
-      
-    </div>
-  );
+export default class App extends Component {
+  state={currentCategory:""}
+  changeCategory  =(catagoriy) => {
+    
+    this.setState({currentCategory:catagoriy.catagoriyName})
+    
+}   
+  render() {
+    return (
+      <div>
+        <Container>
+        <Row>
+          <Col xs='3'>
+           <CatagoriyList currentCategory={this.state.currentCategory} changeCategory={this.changeCategory}/>
+          </Col>
+          <Col xs='9'>
+            <ProductList currentCategory={this.state.currentCategory} />
+          </Col>
+        </Row>
+      </Container>
+      </div>
+    )
+  }
 }
-
-export default App;
